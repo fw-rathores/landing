@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useState } from 'react';
+import { Suspense, useState, useRef, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { ScrollControls, Scroll, useContextBridge, Preload } from '@react-three/drei';
 import { AnimatePresence } from 'framer-motion';
@@ -25,6 +25,45 @@ function AppContent({ loading }: { loading: boolean }) {
   // Bridge the cursor context into the Canvas
   // This must be called in a component that is a child of the Provider
   const ContextBridge = useContextBridge(CursorModeContext);
+  
+  // Dynamic scroll height calculation
+  const [pages, setPages] = useState(3.2);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (loading) return;
+
+    const updatePages = () => {
+      if (contentRef.current) {
+        const height = contentRef.current.offsetHeight;
+        const vh = window.innerHeight;
+        // Calculate pages (height / vh)
+        // Ensure at least 3.2 (desktop default) or enough for content
+        // Adding a small buffer of 0.1
+        const measuredPages = height / vh + 0.1;
+        const newPages = Math.max(measuredPages, 3.2);
+        
+        // Only update if difference is significant (> 0.05) to avoid jitter
+        setPages(prev => Math.abs(prev - newPages) > 0.05 ? newPages : prev);
+      }
+    };
+
+    // Initial check with slight delay for layout stability
+    const timeout = setTimeout(updatePages, 200);
+    const resizeObserver = new ResizeObserver(updatePages);
+    
+    if (contentRef.current) {
+      resizeObserver.observe(contentRef.current);
+    }
+    
+    window.addEventListener('resize', updatePages);
+
+    return () => {
+      clearTimeout(timeout);
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', updatePages);
+    };
+  }, [loading]);
 
   // If still strictly loading (not just fading out), we might want to hide Canvas or keep it hidden
   // But to allow smooth customized entry, we mount it when loading finishes.
@@ -41,7 +80,7 @@ function AppContent({ loading }: { loading: boolean }) {
             <ambientLight intensity={2} />
             <directionalLight position={[0, 5, 5]} intensity={1.2} />
 
-            <ScrollControls pages={3.2} damping={0.2}>
+            <ScrollControls pages={pages} damping={0.2}>
                 <Suspense fallback={null}>
                     <TornadoStrip />
                 </Suspense>
@@ -50,9 +89,11 @@ function AppContent({ loading }: { loading: boolean }) {
                   This allows them to move in sync with the R3F scroll.
                 */}
                 <Scroll html style={{ width: '100%', height: '100%' }}>
-                  <Hero />
-                  <CapabilitiesSection />
-                  <ContactSection />
+                  <div ref={contentRef} style={{ width: '100%' }}>
+                    <Hero />
+                    <CapabilitiesSection />
+                    <ContactSection />
+                  </div>
                 </Scroll>
             </ScrollControls>
             
