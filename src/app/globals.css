@@ -18,16 +18,11 @@
     color: var(--foreground);
     font-family: var(--font-sans);
     overflow-x: hidden;
+    cursor: none !important;
   }
-
-  @media (pointer: fine) {
-    body {
-      cursor: none !important;
-    }
-    
-    a, button, [role="button"], .cursor-pointer {
-      cursor: none !important;
-    }
+  
+  a, button, [role="button"], .cursor-pointer {
+    cursor: none !important;
   }
   h1 {
     font-family: var(--font-display);

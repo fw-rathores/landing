@@ -15,6 +15,7 @@ import {
   CapabilitiesSection, 
   ContactSection 
 } from '@/components/ScrollSections';
+import { TornadoStrip } from '@/components/TornadoCanvas';
 
 // ------------------------------------------------------------------
 // Internal Content Wrapper
@@ -37,13 +38,13 @@ function AppContent({ loading }: { loading: boolean }) {
         className="touch-none"
       >
         <ContextBridge>
-           {/* 
-              Additional 3D content can go here (e.g. Tornado).
-              For now, we have just the DOM scroll content.
-            */}
-            {/* <Tornado /> Placeholder */}
+            <ambientLight intensity={2} />
+            <directionalLight position={[0, 5, 5]} intensity={1.2} />
 
-            <ScrollControls pages={4.5} damping={0.2}>
+            <ScrollControls pages={3.2} damping={0.2}>
+                <Suspense fallback={null}>
+                    <TornadoStrip />
+                </Suspense>
                 {/* 
                   We use <Scroll html> to render our DOM sections inside the scroll container.
                   This allows them to move in sync with the R3F scroll.

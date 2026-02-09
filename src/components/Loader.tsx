@@ -170,20 +170,20 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
             {/* The Percentage - BIG */}
             <div className="relative mb-8">
                 <motion.div 
-                    className="text-6xl md:text-9xl font-black tracking-tighter text-transparent"
+                    className="text-8xl md:text-9xl font-black tracking-tighter text-transparent"
                     style={{ WebkitTextStroke: '2px #555' }}
                 >
                     {displayInt < 10 ? `0${displayInt}` : displayInt}
                 </motion.div>
                 <div className="absolute inset-0 overflow-hidden flex justify-center" style={{ height: `${displayInt}%` }}>
-                     <div className="text-6xl md:text-9xl font-black tracking-tighter text-[#e5e5e5]">
+                     <div className="text-8xl md:text-9xl font-black tracking-tighter text-[#e5e5e5]">
                         {displayInt < 10 ? `0${displayInt}` : displayInt}
                      </div>
                 </div>
                 
                 {/* Decorative brackets */}
-                <div className="absolute -left-4 md:-left-8 top-1/2 -translate-y-1/2 h-16 md:h-24 w-1 bg-[#CCFF00]" />
-                <div className="absolute -right-4 md:-right-8 top-1/2 -translate-y-1/2 h-16 md:h-24 w-1 bg-[#CCFF00]" />
+                <div className="absolute -left-8 top-1/2 -translate-y-1/2 h-24 w-1 bg-[#CCFF00]" />
+                <div className="absolute -right-8 top-1/2 -translate-y-1/2 h-24 w-1 bg-[#CCFF00]" />
             </div>
 
             {/* Progress Bar styled as blocks */}

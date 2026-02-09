@@ -76,9 +76,9 @@ export function CapabilitiesSection() {
       className="relative z-40 pointer-events-auto min-h-screen w-full bg-[#e8e8e8] text-black"
     >
       {/* Plus decorations */}
-      <div className="absolute bottom-[30%] left-[5%] lg:left-[20%] text-[#FF003C]/40 text-lg font-light pointer-events-none">+</div>
+      <div className="absolute bottom-[30%] left-[20%] text-[#FF003C]/40 text-lg font-light pointer-events-none">+</div>
       
-      <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-16 pt-24 pb-0">
+      <div className="max-w-[1400px] mx-auto px-8 lg:px-16 pt-24 pb-0">
         {/* Top Description */}
         <div className="max-w-3xl mb-20">
           <p className="text-lg lg:text-xl font-medium leading-relaxed mb-6">
@@ -90,7 +90,7 @@ export function CapabilitiesSection() {
         </div>
         
         {/* Two Column: Image + Capabilities */}
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-24">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24">
           {/* Left: Image */}
           <div className="aspect-[3/4] max-w-sm overflow-hidden relative bg-black/5">
             <AnimatePresence mode="wait">
@@ -209,9 +209,9 @@ export function ContactSection() {
       }}
     >
       {/* Plus decoration */}
-      <div className="absolute top-1/2 left-[5%] lg:left-[10%] text-[#FF003C]/40 text-lg font-light pointer-events-none">+</div>
+      <div className="absolute top-1/2 left-[10%] text-[#FF003C]/40 text-lg font-light pointer-events-none">+</div>
       
-      <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-16 pt-12 pb-24">
+      <div className="max-w-[1400px] mx-auto px-8 lg:px-16 pt-12 pb-24">
         {/* Main Email */}
         {/* Main Email */}
         <div className="mb-2 relative group w-fit">
@@ -219,7 +219,7 @@ export function ContactSection() {
             onClick={() => {
               navigator.clipboard.writeText('hello@renderless.co');
             }}
-            className="text-[10vw] md:text-[8vw] lg:text-[5vw] font-black leading-[0.95] tracking-tighter uppercase cursor-pointer hover:opacity-70 transition-opacity"
+            className="text-[6vw] lg:text-[5vw] font-black leading-[0.95] tracking-tighter uppercase cursor-pointer hover:opacity-70 transition-opacity"
           >
             HELLO@RENDERLESS.CO
           </h2>
@@ -238,7 +238,7 @@ export function ContactSection() {
         </p>
         
         {/* Team Section */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-12 lg:gap-x-8 lg:gap-y-16 mb-24">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 mb-24">
           {[
             { name: 'JAMES B.', role: 'ART DIRECTOR' },
             { name: 'SARAH L.', role: 'STRATEGY LEAD' },
@@ -268,7 +268,7 @@ export function ContactSection() {
             MADE WITH &lt;3 WORK
           </p>
           <p className="text-xs uppercase tracking-widest text-black/40">
-            &copy; {new Date().getFullYear()} RENDERLESS
+            &copy; 2026 RENDERLESS
           </p>
         </div>
       </div>

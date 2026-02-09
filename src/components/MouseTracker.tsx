@@ -8,14 +8,6 @@ export default function MouseTracker() {
   const crosshairRef = useRef<HTMLDivElement>(null);
   const [isHovering, setIsHovering] = React.useState(false);
   const { isDark } = useContext(CursorModeContext);
-  const [isTouch, setIsTouch] = React.useState(false);
-
-  useEffect(() => {
-    // Check if device is touch-primary
-    setIsTouch(window.matchMedia('(pointer: coarse)').matches);
-  }, []);
-
-  if (isTouch) return null;
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
