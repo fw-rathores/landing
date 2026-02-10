@@ -179,9 +179,9 @@ export function TornadoStrip() {
   const scroll = useScroll();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   
-  const spiralHeight = 5; 
-  const radiusTop = 2.5; 
-  const radiusBottom = 2.0;
+  const spiralHeight = 4.5; 
+  const radiusTop = 1.5; 
+  const radiusBottom = 1.0;
   const cardWidth = 1.0;
   const cardHeight = 1.0;
 

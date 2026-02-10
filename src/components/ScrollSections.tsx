@@ -56,9 +56,9 @@ export function CursorModeProvider({ children }: { children: React.ReactNode }) 
 // CAPABILITIES SECTION
 // ============================================================================
 const brands = [
-  { name: 'Hoka', logo: '/brands/hoka.png', hasCaseStudy: true },
-  { name: 'Heinemann', logo: '/brands/heinemann.png', hasCaseStudy: false },
-  { name: 'Mizuno', logo: '/brands/mizuno.png', hasCaseStudy: false },
+  { name: 'French Avenue', logo: '/brands/fa.png', hasCaseStudy: true },
+  { name: 'Street Origins', logo: '/brands/so.png', hasCaseStudy: true },
+  { name: 'Fragrance World', logo: '/brands/fw.png', hasCaseStudy: false },
 ];
 
 export function CapabilitiesSection() {
@@ -73,12 +73,12 @@ export function CapabilitiesSection() {
   return (
     <section 
       ref={sectionRef}
-      className="relative z-40 pointer-events-auto min-h-screen w-full bg-[#e8e8e8] text-black"
+      className="relative z-40 pointer-events-auto w-full bg-[#e8e8e8] text-black"
     >
       {/* Plus decorations */}
       <div className="absolute bottom-[30%] left-[20%] text-[#FF003C]/40 text-lg font-light pointer-events-none">+</div>
       
-      <div className="max-w-[1400px] mx-auto px-8 lg:px-16 pt-24 pb-0">
+      <div className="max-w-[1400px] mx-auto px-8 lg:px-16 pt-24 pb-40">
         {/* Top Description */}
         <div className="max-w-3xl mb-20">
           <p className="text-lg lg:text-xl font-medium leading-relaxed mb-6">
@@ -160,6 +160,9 @@ export function CapabilitiesSection() {
         
         {/* Brands Section */}
         <div className="mt-24 py-12 border-y border-black/10">
+          <h3 className="text-center text-xs uppercase tracking-widest font-medium mb-12 text-black/60">
+            BRANDS WORKED WITH
+          </h3>
           <div className="flex flex-wrap justify-center items-center gap-16 lg:gap-32">
             {brands.map((brand, i) => (
               <div key={i} className="relative group cursor-pointer">
@@ -205,16 +208,15 @@ export function ContactSection() {
       ref={sectionRef}
       className="relative z-40 pointer-events-auto w-full text-black overflow-hidden"
       style={{
-        background: 'linear-gradient(to bottom, #e8e8e8 0%, #e8e8e8 50%, #FF003C 100%)',
+        background: 'linear-gradient(to bottom, #e8e8e8 0%, #FF003C 100%)',
       }}
     >
       {/* Plus decoration */}
       <div className="absolute top-1/2 left-[10%] text-[#FF003C]/40 text-lg font-light pointer-events-none">+</div>
       
-      <div className="max-w-[1400px] mx-auto px-8 lg:px-16 pt-12 pb-24">
+      <div className="max-w-[1400px] mx-auto px-8 lg:px-16 pt-48 pb-8">
         {/* Main Email */}
-        {/* Main Email */}
-        <div className="mb-2 relative group w-fit">
+        <div className="mb-12 relative group w-fit">
           <h2 
             onClick={() => {
               navigator.clipboard.writeText('hello@renderless.agency');
@@ -233,37 +235,8 @@ export function ContactSection() {
           </div>
         </div>
         
-        <p className="text-sm uppercase tracking-widest mb-8 text-black/60">
-          LET&apos;S CREATE THE NEW &amp; NEXT
-        </p>
-        
-        {/* Team Section */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 mb-24">
-          {[
-            { name: 'JAMES B.', role: 'ART DIRECTOR' },
-            { name: 'SARAH L.', role: 'STRATEGY LEAD' },
-            { name: 'DAVID K.', role: 'TECH DIRECTOR' },
-            { name: 'EMILY R.', role: 'DESIGN LEAD' }
-          ].map((member, i) => (
-            <div key={i} className="group cursor-pointer">
-              {/* Abstract Statue Representation */}
-              <div className="w-full aspect-[2/3] mb-6 relative">
-                 <div className="w-full h-full bg-gradient-to-t from-[#FF003C] via-[#e8e8e8] to-transparent rounded-t-full opacity-60 group-hover:opacity-100 transition-opacity duration-500"></div>
-                 {/* Inner detail to simulate depth/statue feel */}
-                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/5 rounded-t-full mix-blend-overlay"></div>
-              </div>
-              
-              <h4 className="text-sm font-bold uppercase tracking-wider mb-2 text-black">{member.name}</h4>
-              <p className="text-[10px] lg:text-xs text-black/50 uppercase tracking-widest">{member.role}</p>
-            </div>
-          ))}
-        </div>
-        
-        {/* Divider */}
-        <div className="w-full h-[1px] bg-black/20 mb-12"></div>
-        
         {/* Footer */}
-        <div className="flex justify-between items-center pt-8">
+        <div className="flex justify-between items-center border-t border-black/10 pt-8 mt-12">
           <p className="text-xs uppercase tracking-widest text-black/40">
             MADE WITH &lt;3 WORK
           </p>

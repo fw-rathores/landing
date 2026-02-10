@@ -40,8 +40,8 @@ function AppContent({ loading }: { loading: boolean }) {
         // Calculate pages (height / vh)
         // Ensure at least 3.2 (desktop default) or enough for content
         // Adding a small buffer of 0.1
-        const measuredPages = height / vh + 0.1;
-        const newPages = Math.max(measuredPages, 3.2);
+        const measuredPages = height / vh;
+        const newPages = Math.max(measuredPages, 1);
         
         // Only update if difference is significant (> 0.05) to avoid jitter
         setPages(prev => Math.abs(prev - newPages) > 0.05 ? newPages : prev);
