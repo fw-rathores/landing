@@ -82,10 +82,10 @@ export function CapabilitiesSection() {
         {/* Top Description */}
         <div className="max-w-3xl mb-20">
           <p className="text-lg lg:text-xl font-medium leading-relaxed mb-6">
-            Our work is grounded in research and experimentation. We help brands make sense of emerging technologies and turn them into clear, purposeful experiences that stay with people.
+            We are a marketing agency for the post-camera era. We treat generative media as a discipline, not a shortcut.
           </p>
           <p className="text-lg lg:text-xl font-medium leading-relaxed">
-            Everything we create is built in close collaboration with our clients and agency partners, working together to bring ideas to life with clarity and intention.
+            Most AI is random; our process is deterministic. We build custom models trained specifically on your brand’s visual identity—your lighting, your textures, your composition. This gives you an 'always-on' virtual studio that delivers the consistency of a high-end photoshoot, with the scale that only software can provide.
           </p>
         </div>
         
@@ -217,11 +217,11 @@ export function ContactSection() {
         <div className="mb-2 relative group w-fit">
           <h2 
             onClick={() => {
-              navigator.clipboard.writeText('hello@renderless.co');
+              navigator.clipboard.writeText('hello@renderless.agency');
             }}
             className="text-[6vw] lg:text-[5vw] font-black leading-[0.95] tracking-tighter uppercase cursor-pointer hover:opacity-70 transition-opacity"
           >
-            HELLO@RENDERLESS.CO
+            HELLO@RENDERLESS.AGENCY
           </h2>
           
           {/* Copy Tooltip */}

@@ -1,6 +1,6 @@
 export const siteConfig = {
-  heroHeader: "EXPERT DIGITAL\nPRODUCTION",
-  subtext: "Award-winning motion, design and interactive experiences that connect culture, technology, and contemporary aesthetics.",
+  heroHeader: "THE SHOOTLESS\nREVOLUTION",
+  subtext: "We replace traditional photography with deterministic AI pipelines. Studio-grade images and video for luxury brands—generated in days, not months.",
   colors: { background: "#242424", text: "#FFFFFF", accent: "#CCFF00" },
   images: Array.from({ length: 30 }).map((_, i) => ({
     id: i,
@@ -10,33 +10,33 @@ export const siteConfig = {
   navItems: ["MENU"],
   capabilities: [
     { 
-      name: 'Experience Strategy & Design', 
+      name: 'Virtual Photography', 
       number: '01',
-      description: 'We craft digital-first strategies that align brand vision with user needs, creating cohesive ecosystems that scale across multiple touchpoints and platforms.',
+      description: 'Replace $10k photoshoots with infinite generation. We place your products in any environment—from minimalist studios to exotic locations—without a single physical shutter click.',
       image: '/portfolio/work-1.jpg'
     },
     { 
-      name: '3D Visualisation', 
+      name: 'AI Cinematography', 
       number: '02',
-      description: 'High-fidelity 3D rendering and animation that brings complex concepts to life with technical precision and artistic flair, for web, film, and interactive setups.',
+      description: 'Full-motion video ads generated entirely by code. Liquid simulations, slow-motion reveals, and dynamic camera movements that rival high-end cinema production.',
       image: '/portfolio/work-2.jpg'
     },
     { 
-      name: 'Rapid Concept Prototyping', 
+      name: 'Synthetic Influencers', 
       number: '03',
-      description: 'Quickly turning ideas into functional, interactive prototypes. This agile approach allows for immediate testing, refinement, and validation of groundbreaking concepts.',
+      description: 'De-risk your marketing spend. We create AI twins of celebrity archetypes to A/B test campaigns and measure engagement before you hire real talent.',
       image: '/portfolio/work-3.jpg'
     },
     { 
-      name: 'Motion & Production', 
+      name: 'The Infinite Catalog', 
       number: '04',
-      description: 'Dynamic motion graphics and high-end video production that captures attention and tells compelling stories through fluid movement and cinematic quality.',
+      description: 'Move from "digitize once" to "always on." We scale your creative output from 10 SKUs to 10,000, syncing fresh assets directly to your store for seasonal drops and tests.',
       image: '/portfolio/work-4.jpg'
     },
     { 
-      name: 'Website & App Experience', 
+      name: 'One-off work', 
       number: '05',
-      description: 'Building immersive web and mobile applications that prioritize performance and accessibility while delivering unique, memorable user journeys.',
+      description: 'Dashboarding, internal process automations, data scraping, and more.',
       image: '/portfolio/work-5.jpg'
     },
   ],
