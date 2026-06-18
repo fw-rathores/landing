@@ -1,29 +1,55 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import { siteConfig } from '@/siteConfig';
 
 const technicalMessages = [
-  "INITIALIZING CORE SYSTEMS...",
-  "LOADING GEOMETRY BUFFERS...",
-  "COMPILING SHADERS...",
-  "ESTABLISHING SECURE CONNECTION...",
-  "OPTIMIZING ASSETS...",
-  "CALIBRATING INPUT SENSORS...",
-  "RENDERING VIEWPORT...",
-  "SYNCHRONIZING AUDIO...",
-  "ALLOCATING MEMORY BLOCKS...",
-  "SYSTEM CHECK COMPLETE."
+  "INDEXING PRODUCT REFERENCES...",
+  "BUILDING VISUAL CONSTRAINTS...",
+  "LOADING SKU CREATIVE SYSTEM...",
+  "PREPARING INFLUENCER SIGNALS...",
+  "SYNCING SENTIMENT SOURCES...",
+  "MAPPING META PERFORMANCE DATA...",
+  "ASSEMBLING LAUNCH DASHBOARD...",
+  "QUEUING GROWTH RECOMMENDATIONS...",
+  "RENDERLESS SYSTEM READY."
 ];
 
 export default function Loader({ onComplete }: { onComplete: () => void }) {
   const [realProgress, setRealProgress] = useState(0); // Actual load percentage
   const [displayedProgress, setDisplayedProgress] = useState(0); // Visual percentage
-  const [currentMessage, setCurrentMessage] = useState(technicalMessages[0]);
   const [loadingFile, setLoadingFile] = useState("...");
   const [elapsed, setElapsed] = useState(0);
-  const [isLoadingComplete, setIsLoadingComplete] = useState(false);
+  const completionTriggeredRef = useRef(false);
+  const completionTimeoutRef = useRef<number | null>(null);
+  const preloadImagesRef = useRef<HTMLImageElement[]>([]);
+
+  const triggerComplete = useCallback(() => {
+    if (completionTriggeredRef.current) return;
+
+    completionTriggeredRef.current = true;
+    completionTimeoutRef.current = window.setTimeout(() => {
+      onComplete();
+    }, 160);
+  }, [onComplete]);
+
+  useEffect(() => {
+    return () => {
+      if (completionTimeoutRef.current !== null) {
+        window.clearTimeout(completionTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => {
+      completionTriggeredRef.current = true;
+      onComplete();
+    }, 2600);
+
+    return () => window.clearTimeout(timeout);
+  }, [onComplete]);
 
   // Stats for "elapsed time"
   useEffect(() => {
@@ -49,11 +75,10 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
         
         // If real progress is way ahead, move faster. If close, move slower.
         // But force a minimum increment to ensure movement.
-        let step = Math.max(0.2, diff * 0.05); 
+        let step = Math.max(1.2, diff * 0.18); 
         
-        // Cap the step to ensure animation duration (prevent instant jump)
-        // With 60fps, a step of 1.0 means it takes at least 100 frames (1.6s) to fill 0-100
-        step = Math.min(step, 1.5); 
+        // Keep the terminal responsive once assets are cached or locally served.
+        step = Math.min(step, 8); 
         
         let next = prev + step;
         
@@ -74,46 +99,43 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
 
   // Complete trigger
   useEffect(() => {
-    if (displayedProgress >= 100 && !isLoadingComplete) {
-      setIsLoadingComplete(true);
-      // Add a small "System Ready" pause before unmounting
-      setTimeout(() => {
-        onComplete();
-      }, 500);
+    if (displayedProgress >= 100) {
+      triggerComplete();
     }
-  }, [displayedProgress, isLoadingComplete, onComplete]);
+  }, [displayedProgress, triggerComplete]);
 
-  // Update messages based on visual progress for consistency
   useEffect(() => {
-    const msgIndex = Math.min(
-      Math.floor((displayedProgress / 100) * (technicalMessages.length - 1)), 
-      technicalMessages.length - 1
-    );
-    setCurrentMessage(technicalMessages[msgIndex]);
-  }, [displayedProgress]);
-
+    if (realProgress >= 100) {
+      triggerComplete();
+    }
+  }, [realProgress, triggerComplete]);
 
   // Actual Asset Preloading
   useEffect(() => {
     const imageUrls = [
       ...siteConfig.images.map((img) => img.url),
       ...siteConfig.capabilities.map((cap) => cap.image),
-      // Dummy files for visual log
-      '/textures/noise.png',
-      '/models/tornado.glb',
-      '/fonts/inter-tight.woff2',
-      '/audio/startup.mp3',
-      '/shaders/fragment.glsl'
     ];
     
     const uniqueUrls = Array.from(new Set(imageUrls));
     const total = uniqueUrls.length;
     let loaded = 0;
+    let cancelled = false;
+    const fallbackTimeout = window.setTimeout(() => {
+      if (cancelled) return;
+      setLoadingFile('ready');
+      setRealProgress(100);
+      triggerComplete();
+    }, 2200);
 
     const updateRealProgress = (url?: string) => {
+      if (cancelled) return;
       loaded += 1;
       const newProgress = Math.min(Math.round((loaded / total) * 100), 100);
       setRealProgress(newProgress);
+      if (newProgress >= 100) {
+        triggerComplete();
+      }
       
       if (url) {
         const filename = url.split('/').pop() || url;
@@ -122,19 +144,45 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
     };
 
     if (total === 0) {
-        setRealProgress(100);
+        queueMicrotask(() => setRealProgress(100));
         return;
     }
 
     uniqueUrls.forEach((url) => {
       const img = new Image();
+      let settled = false;
+      const markLoaded = () => {
+        if (settled) return;
+        settled = true;
+        updateRealProgress(url);
+      };
+
+      img.onload = markLoaded;
+      img.onerror = markLoaded;
+      img.decoding = 'async';
+      img.loading = 'eager';
       img.src = url;
-      img.onload = () => updateRealProgress(url);
-      img.onerror = () => updateRealProgress(url);
+      preloadImagesRef.current.push(img);
+
+      if (img.complete) {
+        queueMicrotask(markLoaded);
+      }
     });
-  }, []);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(fallbackTimeout);
+      preloadImagesRef.current = [];
+    };
+  }, [triggerComplete]);
 
   const displayInt = Math.floor(displayedProgress);
+  const currentMessage = technicalMessages[
+    Math.min(
+      Math.floor((displayedProgress / 100) * (technicalMessages.length - 1)),
+      technicalMessages.length - 1
+    )
+  ];
 
   return (
     <motion.div
@@ -155,8 +203,8 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
         {/* Top Bar */}
         <div className="absolute top-0 left-0 w-full p-6 flex justify-between items-start text-[10px] tracking-widest opacity-70">
             <div>
-                <div className="font-bold text-[#e5e5e5]">RENDERLESS OS</div>
-                <div className="text-[#CCFF00]">v2.4.0 [BETA]</div>
+                <div className="font-bold text-[#e5e5e5]">RENDERLESS GROWTH OS</div>
+                <div className="text-[#CCFF00]">FRAGRANCE / LAUNCH MODE</div>
             </div>
             <div className="text-right">
                 <div>SYS.STATUS: <span className="text-[#CCFF00]">ONLINE</span></div>
@@ -199,7 +247,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
             </div>
             
             <div className="w-full flex justify-between text-xs tracking-widest text-[#666]">
-                <span>LOADING ASSETS</span>
+                <span>PREPARING LAUNCH SYSTEM</span>
                 <span className="text-[#CCFF00] animate-pulse">PROCESSING</span>
             </div>
         </div>

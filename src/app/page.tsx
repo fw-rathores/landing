@@ -1,5 +1,7 @@
 'use client';
 
+/* eslint-disable react-hooks/static-components */
+
 import { Suspense, useState, useRef, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { ScrollControls, Scroll, useContextBridge, Preload } from '@react-three/drei';
@@ -12,8 +14,7 @@ import MouseTracker from '@/components/MouseTracker';
 import { 
   CursorModeProvider, 
   CursorModeContext, 
-  CapabilitiesSection, 
-  ContactSection 
+  CapabilitiesSection
 } from '@/components/ScrollSections';
 import { TornadoStrip } from '@/components/TornadoCanvas';
 
@@ -27,7 +28,7 @@ function AppContent({ loading }: { loading: boolean }) {
   const ContextBridge = useContextBridge(CursorModeContext);
   
   // Dynamic scroll height calculation
-  const [pages, setPages] = useState(3.2);
+  const [pages, setPages] = useState(5);
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -37,11 +38,8 @@ function AppContent({ loading }: { loading: boolean }) {
       if (contentRef.current) {
         const height = contentRef.current.offsetHeight;
         const vh = window.innerHeight;
-        // Calculate pages (height / vh)
-        // Ensure at least 3.2 (desktop default) or enough for content
-        // Adding a small buffer of 0.1
         const measuredPages = height / vh;
-        const newPages = Math.max(measuredPages, 1);
+        const newPages = Math.max(measuredPages + 0.72, 2);
         
         // Only update if difference is significant (> 0.05) to avoid jitter
         setPages(prev => Math.abs(prev - newPages) > 0.05 ? newPages : prev);
@@ -88,11 +86,10 @@ function AppContent({ loading }: { loading: boolean }) {
                   We use <Scroll html> to render our DOM sections inside the scroll container.
                   This allows them to move in sync with the R3F scroll.
                 */}
-                <Scroll html style={{ width: '100%', height: '100%' }}>
+                <Scroll html style={{ width: '100%', height: '100%', zIndex: 10 }}>
                   <div ref={contentRef} style={{ width: '100%' }}>
                     <Hero />
                     <CapabilitiesSection />
-                    <ContactSection />
                   </div>
                 </Scroll>
             </ScrollControls>

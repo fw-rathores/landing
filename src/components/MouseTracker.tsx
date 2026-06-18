@@ -40,7 +40,7 @@ export default function MouseTracker() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const lineColor = 'bg-[#FF003C]';
+  const lineColor = isDark ? 'bg-black' : 'bg-[#FF003C]';
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[999]">

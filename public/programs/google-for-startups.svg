@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="84" viewBox="0 0 300 84" role="img" aria-label="Google for Startups">
+  <path d="M62 41c0-2.3-.2-4.4-.6-6.5H39v12.3h12.8c-.6 3.1-2.2 5.7-4.7 7.5v4.9h7.7C59.4 55 62 48.8 62 41Z" fill="#4285F4"/>
+  <path d="M39 71c6.5 0 12-2.1 15.9-5.8l-7.7-4.9c-2.1 1.4-4.8 2.3-8.2 2.3-6.3 0-11.6-4.2-13.5-9.9h-8v5.1C21.4 65.6 29.5 71 39 71Z" fill="#34A853"/>
+  <path d="M25.5 52.7c-.5-1.4-.8-3-.8-4.7s.3-3.2.8-4.7v-5.1h-8C15.9 41.1 15 44.5 15 48s.9 6.9 2.5 9.8l8-5.1Z" fill="#FBBC05"/>
+  <path d="M39 33.4c3.5 0 6.7 1.2 9.2 3.6l6.9-6.9C50.9 26.2 45.5 24 39 24c-9.5 0-17.6 5.4-21.5 13.2l8 6.1c1.9-5.7 7.2-9.9 13.5-9.9Z" fill="#EA4335"/>
+  <text x="80" y="40" fill="#F5F5F5" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="800" letter-spacing=".1">Google</text>
+  <text x="81" y="64" fill="#F5F5F5" fill-opacity=".74" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" letter-spacing="2.4">FOR STARTUPS</text>
+</svg>

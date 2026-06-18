@@ -1,43 +1,193 @@
+const portfolioImageNumbers = Array.from({ length: 40 }, (_, i) => i);
+
+const portfolioImageAltTexts = [
+  "AI-generated fragrance product shoot with premium studio lighting",
+  "AI-generated D2C perfume ad creative with lifestyle composition",
+  "Synthetic product photography for fragrance launch assets",
+  "AI-generated ecommerce product visual for perfume packaging",
+  "Creative ad render for fragrance SKU launch campaign",
+  "AI-assisted product shoot for D2C fragrance marketing",
+  "Generated brand campaign image for perfume social ads",
+  "AI-native product photography test for fragrance bottles",
+  "Generated video testimonial thumbnail for fragrance growth work",
+  "AI-generated campaign visual for SKU creative delivery",
+  "Synthetic editorial product shoot for perfume launch content",
+  "AI-assisted fragrance ad asset with model and product styling",
+  "Generated product-led social creative for consumer fragrance",
+  "AI-native studio shoot for perfume bottle merchandising",
+  "Generated Meta ad creative for D2C fragrance performance tests",
+  "AI-generated product and lifestyle composition for perfume ads",
+  "Synthetic fragrance campaign image for launch storytelling",
+  "AI-assisted consumer brand visual for ecommerce and paid social",
+  "Generated product detail shoot for premium fragrance packaging",
+  "AI-native creative asset for perfume SKU launch system",
+  "Generated fragrance ad concept for product-consistent creatives",
+  "AI-generated perfume lifestyle shoot for social campaign testing",
+  "Synthetic product image for Amazon, Meta, and website assets",
+  "Generated creator-style fragrance ad for launch experiments",
+  "AI-assisted product shoot for brand-trained creative pipeline",
+  "Generated fragrance ecommerce image with consistent bottle styling",
+  "AI-native paid social creative for D2C perfume growth",
+  "Synthetic campaign visual for fragrance market testing",
+  "Generated premium perfume product shoot for launch assets",
+  "AI-assisted ad creative for consumer fragrance brands",
+  "Generated SKU visual for Renderless product creative pipeline",
+];
+
 export const siteConfig = {
-  heroHeader: "THE SHOOTLESS\nREVOLUTION",
-  subtext: "We replace traditional photography with deterministic AI pipelines. Studio-grade images and video for luxury brands—generated in days, not months.",
+  siteUrl: "https://renderless.agency",
+  heroHeader: "RENDERLESS",
+  subtext: "AI-native growth team for D2C brands.",
+  proofLine: "Supported by leading startup and cloud programs.",
+  seo: {
+    title: "Renderless | AI-Native Growth Team for D2C Brands",
+    shortTitle: "Renderless",
+    description:
+      "Renderless builds AI-native growth systems for D2C fragrance and consumer brands, shipping product-consistent creatives, AI-generated ads, product shoots, creator research, social listening, dashboards, and weekly growth decisions.",
+    keywords: [
+      "AI generated ads",
+      "AI product photography",
+      "AI product shoots",
+      "D2C growth agency",
+      "fragrance marketing",
+      "perfume product photography",
+      "AI creative pipeline",
+      "Meta ad creatives",
+      "creator research",
+      "social listening",
+      "performance dashboards",
+      "consumer brand growth",
+    ],
+    ogImages: [
+      {
+        url: "/portfolio/work-1.jpg",
+        width: 1200,
+        height: 1600,
+        alt: "AI-generated fragrance product shoot by Renderless",
+      },
+      {
+        url: "/portfolio/work-5.jpg",
+        width: 1200,
+        height: 1600,
+        alt: "AI-generated D2C fragrance ad creative by Renderless",
+      },
+      {
+        url: "/portfolio/work-10.jpg",
+        width: 1200,
+        height: 1600,
+        alt: "AI-assisted product creative for fragrance launch assets",
+      },
+    ],
+  },
   colors: { background: "#242424", text: "#FFFFFF", accent: "#CCFF00" },
-  images: Array.from({ length: 30 }).map((_, i) => ({
-    id: i,
-    url: `/portfolio/work-${i + 1}.jpg`,
-    alt: `Project ${i + 1}`
+  images: portfolioImageNumbers.map((number) => ({
+    id: number,
+    url: `/portfolio/work-${number}.jpg`,
+    alt: portfolioImageAltTexts[number] ?? `AI-generated Renderless portfolio image ${number}`
   })),
   navItems: ["MENU"],
+  partnerPrograms: [
+    { name: "NVIDIA Inception Program", logo: "/programs/nvidia-inception.png" },
+    { name: "AWS Startups", logo: "/programs/aws-startups.png" },
+    { name: "Microsoft for Startups", logo: "/programs/microsoft-for-startups.png" },
+    { name: "Google for Startups", logo: "/programs/google-for-startups.png" },
+  ],
   capabilities: [
     { 
-      name: 'Virtual Photography', 
+      name: 'Product-Consistent Creatives', 
       number: '01',
-      description: 'Replace $10k photoshoots with infinite generation. We place your products in any environment—from minimalist studios to exotic locations—without a single physical shutter click.',
-      image: '/portfolio/work-1.jpg'
+      description: 'Brand-trained AI pipelines generate website, Amazon, Meta, and launch assets while keeping the same bottle, label, lighting, and composition language.',
+      image: '/portfolio/work-1.jpg',
     },
     { 
-      name: 'AI Cinematography', 
+      name: 'Influencer Intelligence', 
       number: '02',
-      description: 'Full-motion video ads generated entirely by code. Liquid simulations, slow-motion reveals, and dynamic camera movements that rival high-end cinema production.',
-      image: '/portfolio/work-2.jpg'
+      description: 'AI-assisted research ranks creators by audience fit, price point, launch relevance, and expected PR value before a fragrance house spends on seeding or paid collaborations.',
+      image: '/portfolio/work-2.jpg',
     },
     { 
-      name: 'Synthetic Influencers', 
+      name: 'Social Listening', 
       number: '03',
-      description: 'De-risk your marketing spend. We create AI twins of celebrity archetypes to A/B test campaigns and measure engagement before you hire real talent.',
-      image: '/portfolio/work-3.jpg'
+      description: 'Scraping and analysis pipelines track TikTok, Instagram, Reddit, Fragrantica, reviews, and competitor chatter while the campaign is still live.',
+      image: '/portfolio/work-3.jpg',
     },
     { 
-      name: 'The Infinite Catalog', 
+      name: 'Performance Dashboards', 
       number: '04',
-      description: 'Move from "digitize once" to "always on." We scale your creative output from 10 SKUs to 10,000, syncing fresh assets directly to your store for seasonal drops and tests.',
-      image: '/portfolio/work-4.jpg'
+      description: 'Internal data systems connect Meta, Shopify, CRM, distributor, and sales data into dashboards that show what deserves more spend.',
+      image: '/portfolio/work-4.jpg',
     },
     { 
-      name: 'One-off work', 
+      name: 'Growth Recommendations', 
       number: '05',
-      description: 'Dashboarding, internal process automations, data scraping, and more.',
-      image: '/portfolio/work-5.jpg'
+      description: 'GPT-backed workflows turn creative, influencer, sentiment, and ad data into weekly decisions: what to scale, what to remake, who to seed, and which SKU deserves the next push.',
+      image: '/portfolio/work-5.jpg',
     },
+    {
+      name: 'Misc Growth Ops',
+      number: '06',
+      description: 'The odd useful work that never fits neatly in an agency scope: scraping, internal automations, video experiments, voice tests, one-off dashboards, launch QA, and founder-requested workflows.',
+      image: '/portfolio/work-6.jpg',
+    },
+  ],
+  caseStudies: [
+    {
+      brand: "Street Origins",
+      label: "Retainer / Meta access",
+      result: "40 SKUs delivered in under two weeks. Moved from launch project to monthly retainer with full Meta ads access.",
+      logo: "/brands/so.png",
+      work: [
+        "40 SKU launch asset sprint",
+        "Product-consistent creative system",
+        "Meta ads account access",
+        "Monthly retained growth workflow",
+      ],
+    },
+    {
+      brand: "French Avenue",
+      label: "137 SKUs / reusable pipeline",
+      result: "137 SKUs delivered with the same pipeline foundation. Influencer rankings were ready on day one.",
+      logo: "/brands/fa.png",
+      work: [
+        "137 SKU creative delivery",
+        "Reusable product pipeline",
+        "Influencer ranking on day one",
+        "Launch-cycle creative direction",
+      ],
+    },
+    {
+      brand: "Fragrance World",
+      label: "Paid launch project",
+      result: "Launch creative and SKU asset production for a new paid project, built on the operating system from prior clients.",
+      logo: "/brands/fw.png",
+      work: [
+        "Paid launch project",
+        "SKU asset production",
+        "Creative pipeline reuse",
+        "Operating system onboarding",
+      ],
+    },
+  ],
+  testimonials: [
+    {
+      name: "Chief of Staff",
+      company: "Street Origins",
+      type: "Video testimonial",
+      thumbnail: "/portfolio/work-9.jpg",
+      note: "Launch workflow, creative delivery, and retainer expansion.",
+    },
+    {
+      name: "Business Head",
+      company: "French Avenue",
+      type: "Video testimonial",
+      thumbnail: "/portfolio/work-10.jpg",
+      note: "SKU pipeline, influencer direction, and launch-cycle speed.",
+    },
+  ],
+  dataAdvantage: [
+    "Your product references, winners, rejects, ad data, creator lists, and SKU learnings accumulate inside one operating loop.",
+    "Every new brief starts with context from the last one, so the system gets faster at matching your brand, channels, and price points.",
+    "We charge for shipped outcomes and decisions, not random tools, subscriptions, seats, or dashboards your team still has to operate.",
+    "The compounding advantage becomes simple: less briefing, fewer vendors, better defaults, faster useful output.",
   ],
 };

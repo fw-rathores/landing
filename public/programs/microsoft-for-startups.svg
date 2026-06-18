@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="84" viewBox="0 0 300 84" role="img" aria-label="Microsoft for Startups">
+  <rect x="20" y="23" width="19" height="19" fill="#F25022"/>
+  <rect x="43" y="23" width="19" height="19" fill="#7FBA00"/>
+  <rect x="20" y="46" width="19" height="19" fill="#00A4EF"/>
+  <rect x="43" y="46" width="19" height="19" fill="#FFB900"/>
+  <text x="82" y="40" fill="#F5F5F5" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="800" letter-spacing=".1">Microsoft</text>
+  <text x="83" y="64" fill="#F5F5F5" fill-opacity=".74" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" letter-spacing="2.4">FOR STARTUPS</text>
+</svg>

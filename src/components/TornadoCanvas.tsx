@@ -6,6 +6,36 @@ import { useScroll, ScrollControls, Scroll } from '@react-three/drei';
 import * as THREE from 'three';
 import { siteConfig } from '@/siteConfig';
 
+const tornadoImages = [...siteConfig.images].sort((a, b) => b.id - a.id);
+const tornadoImageUrls = tornadoImages.map((image) => image.url);
+
+if (typeof window !== 'undefined') {
+  useLoader.preload(THREE.TextureLoader, tornadoImageUrls);
+}
+
+const ribbonVertexShader = `
+  varying vec2 vUv;
+
+  void main() {
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+
+const ribbonFragmentShader = `
+  uniform sampler2D uTexture;
+  uniform float uSaturation;
+  uniform float uBrightness;
+  varying vec2 vUv;
+
+  void main() {
+    vec4 texel = texture2D(uTexture, vUv);
+    float gray = dot(texel.rgb, vec3(0.299, 0.587, 0.114));
+    texel.rgb = mix(vec3(gray), texel.rgb, uSaturation) * uBrightness;
+    gl_FragColor = texel;
+  }
+`;
+
 // Creates a sheared ribbon segment geometry to follow the spiral slope
 function createRibbonSegmentGeometry(
   width: number, 
@@ -72,25 +102,30 @@ function RibbonCard({
 }) {
   const groupRef = useRef<THREE.Group>(null);
   const frontMeshRef = useRef<THREE.Mesh>(null);
+  const frontMaterialRef = useRef<THREE.ShaderMaterial>(null);
   const texture = useLoader(THREE.TextureLoader, url);
   const isFrontFacingRef = useRef(true);
-  
-  // Clone texture for back side to allow independent material settings
-  const backTexture = useMemo(() => {
-    const cloned = texture.clone();
-    cloned.needsUpdate = true;
-    return cloned;
-  }, [texture]);
   
   const geometry = useMemo(() => 
     createRibbonSegmentGeometry(width, height, radius, slope, thetaStart), 
     [width, height, radius, slope, thetaStart]
   );
 
+  const frontUniforms = useMemo(() => ({
+    uTexture: { value: texture },
+    uSaturation: { value: 1 },
+    uBrightness: { value: 1 },
+  }), [texture]);
+  const backUniforms = useMemo(() => ({
+    uTexture: { value: texture },
+    uSaturation: { value: 0 },
+    uBrightness: { value: 0.55 },
+  }), [texture]);
+
   const isHovered = hoveredIndex === index;
   const isGlobalHover = hoveredIndex !== null;
 
-  useFrame((state) => {
+  useFrame(() => {
     if (!groupRef.current || !frontMeshRef.current) return;
 
     // Check if the card is facing the camera by checking if its center is on the camera side
@@ -114,29 +149,37 @@ function RibbonCard({
     isFrontFacingRef.current = Math.cos(rotatedTheta) > 0;
 
     // 1. Calculate Targets
-    let targetZ = 0;
-    // Use color as a brightness multiplier - full white = full brightness
-    let targetColor = new THREE.Color(1, 1, 1); 
+    const outward = new THREE.Vector3(Math.sin(thetaCenter), 0, Math.cos(thetaCenter));
+    const targetPosition = new THREE.Vector3(0, 0, 0);
+    let targetSaturation = 1;
+    let targetBrightness = 1;
 
     if (isGlobalHover) {
       if (isHovered) {
-        targetZ = 0.5; // Pop out forward
-        // Hovered card stays at full brightness
-        targetColor = new THREE.Color(1, 1, 1);
+        targetPosition.add(outward.multiplyScalar(0.14));
       } else {
-        // Non-hovered cards: dim colors but keep full opacity
-        targetColor = new THREE.Color(0.4, 0.4, 0.4);
+        // Non-hovered cards switch to monochrome and step back visually.
+        targetSaturation = 0;
+        targetBrightness = 0.9;
       }
     }
 
     // 2. Apply smooth animations
-    groupRef.current.position.z = THREE.MathUtils.lerp(groupRef.current.position.z, targetZ, 0.1);
+    groupRef.current.position.lerp(targetPosition, 0.12);
     
-    // Apply color changes to the front mesh
-    const mat = frontMeshRef.current.material as THREE.MeshBasicMaterial;
-    if (mat.color) {
-      mat.color.lerp(targetColor, 0.1);
-    }
+    const material = frontMaterialRef.current;
+    if (!material) return;
+
+    material.uniforms.uSaturation.value = THREE.MathUtils.lerp(
+      material.uniforms.uSaturation.value as number,
+      targetSaturation,
+      0.15
+    );
+    material.uniforms.uBrightness.value = THREE.MathUtils.lerp(
+      material.uniforms.uBrightness.value as number,
+      targetBrightness,
+      0.15
+    );
   });
 
   const handlePointerOver = (e: { stopPropagation: () => void }) => {
@@ -159,15 +202,24 @@ function RibbonCard({
     >
       {/* VISIBLE SIDE (Full Brightness - faces camera, uses BackSide due to geometry normals) */}
       <mesh ref={frontMeshRef} geometry={geometry}>
-        <meshBasicMaterial map={texture} color={new THREE.Color(1, 1, 1)} side={THREE.BackSide} />
+        <shaderMaterial
+          ref={frontMaterialRef}
+          uniforms={frontUniforms}
+          vertexShader={ribbonVertexShader}
+          fragmentShader={ribbonFragmentShader}
+          side={THREE.BackSide}
+          toneMapped={false}
+        />
       </mesh>
 
       {/* HIDDEN SIDE (Dimmed - faces away from camera, uses FrontSide) */}
       <mesh geometry={geometry}>
-        <meshBasicMaterial 
-          map={backTexture}
-          color={new THREE.Color(0.25, 0.25, 0.25)}
-          side={THREE.FrontSide} 
+        <shaderMaterial
+          uniforms={backUniforms}
+          vertexShader={ribbonVertexShader}
+          fragmentShader={ribbonFragmentShader}
+          side={THREE.FrontSide}
+          toneMapped={false}
         />
       </mesh>
     </group>
@@ -179,15 +231,24 @@ export function TornadoStrip() {
   const scroll = useScroll();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   
-  const spiralHeight = 4.5; 
+  const originalImageCount = 31;
+  const spiralHeight = 4.5 * (tornadoImages.length / originalImageCount); 
   const radiusTop = 1.5; 
   const radiusBottom = 1.0;
   const cardWidth = 1.0;
   const cardHeight = 1.0;
 
   const cards = useMemo(() => {
-    const items: any[] = [];
-    const images = siteConfig.images;
+    const items: Array<{
+      id: number;
+      url: string;
+      thetaStart: number;
+      radius: number;
+      slope: number;
+      width: number;
+      height: number;
+    }> = [];
+    const images = tornadoImages;
     const numImages = images.length;
     
     // 1. Calculate total theta
@@ -220,10 +281,11 @@ export function TornadoStrip() {
     });
 
     return items;
-  }, []);
+  }, [spiralHeight]);
 
   useFrame((state, delta) => {
     if (!group.current) return;
+    group.current.scale.setScalar(1.06);
 
     // 1. Mouse Tilt logic
     const targetTiltX = -state.mouse.y * 0.1;
@@ -237,10 +299,10 @@ export function TornadoStrip() {
     group.current.rotation.y += autoSpeed + (scroll.delta * 2);
 
     // 3. Vertical Travel
-    // Start significantly below the viewport top to clear the header
+    // Start significantly below the viewport top to clear the header.
     // Viewport height at z=5 is approx 3 units. Top is ~1.5. Bottom is ~-1.5.
-    // We set top of spiral to start near the bottom of the screen.
-    const targetTopY = -0.5;
+    // We set the top of the spiral near the lower half of the screen.
+    const targetTopY = -0.85;
     const startY = targetTopY - spiralHeight;
     // Move upwards as we scroll
     group.current.position.y = startY + (scroll.offset * spiralHeight * 3);
