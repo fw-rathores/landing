@@ -80,7 +80,7 @@ export default function Hero() {
             className="group relative mt-7 inline-flex h-14 items-center justify-center overflow-hidden border border-white/20 bg-white px-9 text-xs font-black uppercase tracking-[0.22em] text-black transition-colors hover:border-[#FF003C] hover:bg-[#FF003C] hover:text-white"
           >
             <span className="absolute inset-y-0 left-0 w-1.5 bg-[#FF003C] transition-all group-hover:w-full" />
-            <span className="relative z-10">Give us the mess</span>
+            <span className="relative z-10">Send a campaign brief</span>
           </button>
           <div className="hero-proof-field relative mx-auto mt-12 w-full max-w-4xl px-4 py-4 lg:mt-14">
             <div className="relative z-10 mx-auto flex max-w-3xl items-center justify-center gap-4 text-center">

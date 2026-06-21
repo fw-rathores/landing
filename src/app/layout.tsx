@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Renderless", url: siteUrl }],
   creator: "Renderless",
   publisher: "Renderless",
-  category: "AI creative operations",
+  category: "Performance creative agency",
   alternates: {
     canonical: "/",
   },
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   other: {
-    "portfolio:creative_types": "AI-generated ads, AI product shoots, product-consistent creatives, fragrance launch assets",
+    "portfolio:creative_types": "AI-generated ads, performance creative, Meta campaigns, TikTok campaigns, fragrance campaign assets",
     "portfolio:primary_vertical": "D2C fragrance and consumer brands",
   },
 };
@@ -100,7 +100,7 @@ const jsonLd = {
     {
       "@type": "ProfessionalService",
       "@id": `${siteUrl}/#service`,
-      name: "Renderless AI-native growth team",
+      name: "Renderless performance creative agency",
       url: siteUrl,
       provider: { "@id": `${siteUrl}/#organization` },
       areaServed: "Worldwide",
@@ -108,10 +108,12 @@ const jsonLd = {
         "AI-generated ads",
         "AI product photography",
         "AI product shoots",
-        "D2C growth operations",
+        "Meta campaign management",
+        "TikTok campaign management",
+        "Performance creative",
         "Creator research",
-        "Social listening",
-        "Performance dashboards",
+        "Market listening",
+        "Campaign reporting",
       ],
       audience: {
         "@type": "Audience",
@@ -122,9 +124,9 @@ const jsonLd = {
     {
       "@type": "ImageGallery",
       "@id": `${siteUrl}/#portfolio`,
-      name: "Renderless AI-generated ads and product shoots",
+      name: "Renderless AI-generated ads and campaign creative",
       url: siteUrl,
-      about: "AI-generated ads, product-consistent creatives, fragrance product shoots, and launch assets.",
+      about: "AI-generated ads, performance creative, fragrance campaign assets, and paid social campaign visuals.",
       associatedMedia: siteConfig.images.slice(0, 12).map((image) => ({
         "@type": "ImageObject",
         contentUrl: absoluteUrl(image.url),

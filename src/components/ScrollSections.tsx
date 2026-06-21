@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Linkedin } from 'lucide-react';
 import { siteConfig } from '@/siteConfig';
 
 // Hook to detect when a section is in viewport and trigger dark mode for cursor
@@ -332,12 +333,12 @@ function LeadFormModal({
             <div className="relative grid gap-8 p-6 lg:grid-cols-[0.72fr_1.28fr] lg:p-8">
               <div className="flex flex-col justify-between gap-8 border-b border-white/10 pb-6 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-8">
                 <div>
-                  <SectionKicker tone="light">Brief intake / tiny cat supervisor</SectionKicker>
+                  <SectionKicker tone="light">Campaign brief / Scranton desk</SectionKicker>
                   <h3 id="lead-form-title" className="mt-5 text-4xl font-black uppercase leading-[0.9] tracking-tighter lg:text-6xl">
-                    Feed the work stack.
+                    Send the campaign brief.
                   </h3>
                   <p className="mt-5 text-base font-medium leading-relaxed text-white/58">
-                    Drop the brand lore, deadline pressure, tool pile, and that one task that keeps ricocheting between people. We will paw through it and send back the fastest first move.
+                    Tell us your product, offer, audience, current channels, and what you want to test. We will reply with the fastest path to a live campaign batch.
                   </p>
                 </div>
 
@@ -365,7 +366,7 @@ function LeadFormModal({
                     value={form.name}
                     onChange={(event) => onFieldChange('name', event.target.value)}
                     className="h-12 border border-white/12 bg-black/10 px-3 text-base font-medium text-white outline-none transition-colors placeholder:text-white/25 focus:border-[#FF003C]"
-                    placeholder="Your name"
+                    placeholder="Michael Scott"
                   />
                 </label>
 
@@ -376,7 +377,7 @@ function LeadFormModal({
                     value={form.company}
                     onChange={(event) => onFieldChange('company', event.target.value)}
                     className="h-12 border border-white/12 bg-black/10 px-3 text-base font-medium text-white outline-none transition-colors placeholder:text-white/25 focus:border-[#FF003C]"
-                    placeholder="Brand / company"
+                    placeholder="Dunder Mifflin"
                   />
                 </label>
 
@@ -388,7 +389,7 @@ function LeadFormModal({
                     value={form.email}
                     onChange={(event) => onFieldChange('email', event.target.value)}
                     className="h-12 border border-white/12 bg-black/10 px-3 text-base font-medium text-white outline-none transition-colors placeholder:text-white/25 focus:border-[#FF003C]"
-                    placeholder="you@brand.com"
+                    placeholder="michael@dundermifflin.example"
                   />
                 </label>
 
@@ -422,14 +423,14 @@ function LeadFormModal({
                     value={form.message}
                     onChange={(event) => onFieldChange('message', event.target.value)}
                     className="min-h-36 resize-y border border-white/12 bg-black/10 px-3 py-3 text-base font-medium leading-relaxed text-white outline-none transition-colors placeholder:text-white/25 focus:border-[#FF003C]"
-                    placeholder="What needs shipping, what keeps wobbling, and who is currently holding the ball of yarn?"
+                    placeholder="Michael from Dunder Mifflin. We sell paper, which is apparently not a TikTok category, but the campaigns are too stable, spend is getting heavy, and every new ad takes forever to get online. Need Meta/TikTok tests for small businesses, office managers, and people who panic-buy printer paper at 4:58 pm."
                   />
                 </label>
 
                 <div className="flex flex-col gap-3 border-t border-white/10 pt-5 lg:col-span-2 lg:flex-row lg:items-center lg:justify-between">
                   <p className="min-h-5 text-xs font-medium text-white/48">
-                    {status === 'loading' && 'The cat is dragging your brief into the operating loop...'}
-                    {status === 'success' && 'Brief sent. We will reply with the fastest first workflow.'}
+                    {status === 'loading' && 'Sending the campaign brief...'}
+                    {status === 'success' && 'Brief sent. We will reply with the fastest path to campaign.'}
                     {status === 'error' && error}
                   </p>
                   <button
@@ -663,9 +664,9 @@ export function CapabilitiesSection() {
         <div className="relative left-1/2 mb-24 w-screen -translate-x-1/2 overflow-hidden bg-[#242424] text-[#e8e8e8]">
           <div className="mx-auto max-w-[1400px] px-8 py-14 lg:px-16 lg:py-16">
           <div className="max-w-6xl">
-            <SectionKicker tone="light">The coordination tax</SectionKicker>
+            <SectionKicker tone="light">The creative bottleneck</SectionKicker>
             <p className="mt-6 max-w-6xl text-3xl lg:text-[3.4rem] xl:text-6xl font-black leading-[0.92] tracking-tighter uppercase mb-10">
-            You do not have an ideas problem. You have a coordination problem.
+            Your ads are fatiguing faster than your team can replace them.
             </p>
             <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
               <div>
@@ -673,10 +674,10 @@ export function CapabilitiesSection() {
                   What actually happens
                 </p>
                 <p className="mt-5 text-base lg:text-xl font-medium leading-relaxed text-white/78">
-                  Your team knows the next moves: more creatives, better influencer research, sharper ad tests, social listening, dashboards, SKU decisions.
+                  D2C campaigns need fresh angles, visuals, offers, and tests every week.
                 </p>
                 <p className="mt-5 text-base lg:text-xl font-medium leading-relaxed text-white/58">
-                  But every piece lives with a different agency, freelancer, tool, spreadsheet, or WhatsApp thread. The founder becomes the human router.
+                  But shoots, renders, editors, freelancers, and approval loops were built for occasional campaigns, not constant iteration.
                 </p>
               </div>
 
@@ -685,10 +686,10 @@ export function CapabilitiesSection() {
                   Enter Renderless
                 </p>
                 <p className="mt-5 text-base lg:text-xl font-medium leading-relaxed text-white/84">
-                  Renderless absorbs that coordination. We use internal AI systems to generate assets, research creators, monitor the market, connect performance data, and turn it into decisions.
+                  Renderless closes that gap. We generate the assets, build the Meta and TikTok tests, read the market response, and turn the next creative batch around before performance goes stale.
                 </p>
                 <p className="mt-5 text-base lg:text-xl font-medium leading-relaxed text-white/62">
-                  You get finished work and clear recommendations, not another platform to operate or another vendor to manage.
+                  Campaigns keep learning while production keeps moving.
                 </p>
               </div>
             </div>
@@ -698,16 +699,16 @@ export function CapabilitiesSection() {
 
         <div className="mb-28">
           <div className="mb-8">
-            <div className="max-w-4xl">
+            <div className="max-w-3xl">
               <SectionKicker>What we ship</SectionKicker>
-              <h3 className="mt-4 text-3xl lg:text-6xl font-black uppercase tracking-tighter leading-none">
-                Work we take off your plate.
+              <h3 className="mt-4 text-3xl font-black uppercase leading-none tracking-tighter lg:text-5xl">
+                Campaign work, end to end.
               </h3>
             </div>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.38fr)] lg:items-start lg:gap-12">
-            <div className="border-y border-black/10">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(360px,0.48fr)] lg:items-center lg:gap-14">
+            <div className="max-w-[900px] border-y border-black/10">
               {siteConfig.capabilities.map((cap) => {
                 const isOpen = openCapability === cap.number;
 
@@ -758,33 +759,20 @@ export function CapabilitiesSection() {
               })}
             </div>
 
-            <aside className="lg:sticky lg:top-10">
-              <div className="mx-auto aspect-[9/16] w-full max-w-[330px] overflow-hidden border border-black/15 bg-[#242424] text-[#e8e8e8] lg:mx-0 lg:ml-auto">
-                <div
-                  className="relative h-full"
-                  style={{
-                    backgroundImage:
-                      'linear-gradient(#e8e8e814 1px, transparent 1px), linear-gradient(90deg, #e8e8e814 1px, transparent 1px)',
-                    backgroundSize: '28px 28px',
-                  }}
-                >
-                  <div className="absolute left-4 top-4 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-white/55">
-                    <span className="h-2 w-2 rounded-full bg-[#FF003C]" />
-                    Reel placeholder
-                  </div>
-                  <div className="absolute inset-x-6 top-1/2 -translate-y-1/2">
-                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-white/20 bg-white/8">
-                      <div className="ml-1 h-0 w-0 border-y-[10px] border-l-[16px] border-y-transparent border-l-white" />
-                    </div>
-                    <p className="mt-6 text-center font-mono text-[10px] uppercase tracking-[0.22em] text-white/45">
-                      Offerings explainer / 9:16
-                    </p>
-                  </div>
-                  <div className="absolute inset-x-4 bottom-4 border-t border-white/10 pt-4">
-                    <p className="text-sm font-medium leading-relaxed text-white/70">
-                      Static reel slot for the founder walkthrough of everything Renderless can ship.
-                    </p>
-                  </div>
+            <aside className="pt-2 lg:sticky lg:top-12">
+              <div className="mx-auto aspect-[3/4] w-full max-w-[430px] overflow-hidden border border-black/15 bg-[#242424] text-[#e8e8e8] lg:mx-0 lg:ml-auto">
+                <div className="relative h-full">
+                  <video
+                    className="h-full w-full object-cover"
+                    src="/renderless-launch.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    aria-label="Renderless offerings explainer"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-black/5" />
                 </div>
               </div>
             </aside>
@@ -793,16 +781,13 @@ export function CapabilitiesSection() {
 
         <div className="relative left-1/2 mb-24 w-screen -translate-x-1/2 bg-[#242424] text-[#e8e8e8]">
           <div className="mx-auto max-w-[1400px] px-8 py-16 lg:px-16">
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10">
-            <div>
+          <div className="mb-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-none">
               <SectionKicker tone="light">Selected work</SectionKicker>
-              <h3 className="mt-4 text-3xl lg:text-6xl font-black uppercase tracking-tighter leading-none">
-                Work done so far.
+              <h3 className="mt-4 text-3xl font-black uppercase leading-none tracking-tighter lg:whitespace-nowrap lg:text-5xl xl:text-6xl">
+                Brands running Renderless.
               </h3>
             </div>
-            <p className="max-w-sm text-sm leading-relaxed text-white/55">
-              Client details stay compressed, but the shape is clear: one-off work expands into retained growth infrastructure.
-            </p>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-4">
@@ -825,9 +810,14 @@ export function CapabilitiesSection() {
                   <h4 className="text-xl font-black uppercase tracking-tighter mb-4">
                     {study.brand}
                   </h4>
-                  <p className="text-sm leading-relaxed text-white/60">
-                    {study.result}
+                  <p className="text-sm leading-relaxed text-white/58">
+                    {study.subtext}
                   </p>
+                  {study.result && (
+                    <p className="text-sm leading-relaxed text-white/60">
+                      {study.result}
+                    </p>
+                  )}
                   <div className="mt-6 divide-y divide-white/10 border-y border-white/10">
                     {study.work.map((item) => (
                       <p key={item} className="py-3 text-xs uppercase tracking-[0.12em] text-white/50">
@@ -843,20 +833,20 @@ export function CapabilitiesSection() {
         </div>
 
         <div className="mb-24">
-          <SectionKicker>Video testimonials</SectionKicker>
+          <SectionKicker>What clients say</SectionKicker>
           <div className="mt-8 grid gap-4 lg:grid-cols-2">
             {siteConfig.testimonials.map((item) => (
-              <article key={`${item.name}-${item.company}`} className="grid border border-black/10 bg-[#efefef] sm:grid-cols-[0.8fr_1fr]">
-                <div className="relative aspect-video overflow-hidden bg-black sm:aspect-auto">
+              <article key={`${item.name}-${item.company}`} className="grid border border-black/10 bg-[#efefef] sm:grid-cols-[250px_1fr]">
+                <div className="relative aspect-square overflow-hidden bg-black sm:aspect-auto sm:min-h-[250px]">
                   <Image
                     src={item.thumbnail}
-                    alt={`${item.company} video testimonial placeholder`}
+                    alt={`${item.name}, ${item.title} at ${item.company}`}
                     fill
-                    sizes="(min-width: 1024px) 20vw, calc(50vw - 40px)"
-                    className="object-cover grayscale opacity-60"
+                    sizes="(min-width: 640px) 250px, calc(100vw - 64px)"
+                    className="object-contain object-center grayscale opacity-85"
                   />
                   <div className="absolute inset-0 bg-black/20" />
-                  <div className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 bg-black/50">
+                  <div className="absolute bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full border border-white/40 bg-black/50">
                     <div className="ml-1 h-0 w-0 border-y-[9px] border-l-[14px] border-y-transparent border-l-white" />
                   </div>
                   <div className="absolute left-4 top-4 text-[10px] uppercase tracking-[0.2em] text-white/70 font-mono">
@@ -864,9 +854,32 @@ export function CapabilitiesSection() {
                   </div>
                 </div>
                 <div className="p-5">
-                  <h4 className="text-2xl font-black uppercase tracking-tighter">{item.company}</h4>
+                  <div className="flex items-start justify-between gap-4">
+                    <h4 className="text-2xl font-black uppercase tracking-tighter">
+                      <a
+                        href={item.linkedinUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="transition-colors hover:text-[#FF003C] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#FF003C]"
+                      >
+                        {item.name}
+                      </a>
+                    </h4>
+                    <a
+                      href={item.linkedinUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Open ${item.name}'s LinkedIn profile`}
+                      className="group/linkedin inline-flex h-9 w-9 shrink-0 items-center justify-center border border-black/10 bg-black/[0.035] text-black/28 transition-colors hover:border-black/25 hover:bg-black/[0.07] hover:text-black/55"
+                    >
+                      <Linkedin aria-hidden="true" className="h-4 w-4" strokeWidth={2} />
+                    </a>
+                  </div>
                   <p className="mt-2 text-[10px] uppercase tracking-[0.22em] font-mono text-[#FF003C]">
-                    {item.name}
+                    {item.title}
+                  </p>
+                  <p className="mt-2 text-[10px] uppercase tracking-[0.22em] font-mono text-black/34">
+                    {item.company}
                   </p>
                   <p className="mt-8 text-sm leading-relaxed text-black/60">
                     {item.note}
@@ -880,9 +893,9 @@ export function CapabilitiesSection() {
         <div className="border-y border-black/10 py-14">
           <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
             <div>
-              <SectionKicker>The secret sauce</SectionKicker>
+              <SectionKicker>The campaign loop</SectionKicker>
               <h3 className="mt-6 text-3xl lg:text-6xl font-black uppercase tracking-tighter leading-none">
-                We get better because your data stays in the loop.
+                Every new ad starts with what the last one learned.
               </h3>
               <button
                 type="button"
@@ -890,7 +903,7 @@ export function CapabilitiesSection() {
                 onClick={openBriefForm}
                 className="mt-8 inline-flex h-12 items-center justify-center border border-black bg-black px-6 text-xs font-black uppercase tracking-[0.18em] text-white transition-colors hover:border-[#FF003C] hover:bg-[#FF003C]"
               >
-                Throw it in
+                Send a brief
               </button>
             </div>
             <div className="divide-y divide-black/10 border-y border-black/10">
@@ -907,7 +920,6 @@ export function CapabilitiesSection() {
             </div>
           </div>
         </div>
-
         <footer className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-[#242424] text-[#e8e8e8]">
           <div
             className="pointer-events-none absolute inset-0 opacity-[0.22]"
@@ -921,7 +933,7 @@ export function CapabilitiesSection() {
           <div className="absolute left-0 top-0 h-px w-full bg-white/18" />
           <div className="relative mx-auto max-w-[1400px] px-8 py-12 lg:px-16 lg:py-16">
             <div className="border-y border-white/10 py-8">
-              <SectionKicker tone="light">Dictionary / post-camera growth</SectionKicker>
+              <SectionKicker tone="light">Dictionary / renderless</SectionKicker>
               <div className="mt-6 grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
                 <div>
                   <div>
@@ -937,7 +949,7 @@ export function CapabilitiesSection() {
                     </p>
                   </div>
                   <p className="mt-8 max-w-lg text-base font-medium leading-relaxed text-white/68 lg:text-lg">
-                    The move from shoot-dependent growth to an AI-native operating loop where the work ships before coordination turns into a full-time job.
+                    The way D2C brands run paid campaigns when they need fresh creative faster than shoots, renders, and traditional production can move.
                   </p>
                   <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                     <button
@@ -959,9 +971,9 @@ export function CapabilitiesSection() {
                 <div>
                   <div className="divide-y divide-white/10 border-y border-white/10">
                     {[
-                      'The post-camera growth mode for D2C brands: creative output, creator research, market listening, dashboards, and weekly decisions from one loop.',
-                      'A way to collapse agencies, freelancers, tools, spreadsheets, and WhatsApp threads into finished work your team can use.',
-                      'Usage: We went renderless and shipped the SKU before the old production plan got approved.',
+                      'Campaign creative without shoot calendars, studio costs, or render queues.',
+                      'A feedback loop where comments, reviews, performance, and market sentiment decide what gets made next.',
+                      'Usage: We went renderless when the campaign needed 30 new ads by Friday and the shoot was still two weeks away.',
                     ].map((definition, index) => (
                       <div key={definition} className="grid grid-cols-[2rem_minmax(0,1fr)] items-start gap-5 py-5">
                         <span className="pt-2 text-right font-mono text-xs font-black leading-none tabular-nums text-white/55">
@@ -978,9 +990,9 @@ export function CapabilitiesSection() {
             </div>
 
             <div className="mt-4 grid gap-6 text-[10px] uppercase tracking-[0.22em] text-white/36 md:grid-cols-3">
-              <p>Renderless / AI-native growth team</p>
+              <p>Renderless / performance creative agency</p>
               <p className="md:text-center">D2C fragrance and consumer brands</p>
-              <p className="md:text-right">2026 / built for shipped work</p>
+              <p className="md:text-right">2026 / built for campaign volume</p>
             </div>
           </div>
         </footer>

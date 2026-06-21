@@ -312,7 +312,7 @@ export function TornadoStrip() {
     <group ref={group}>
       {cards.map((card, i) => (
         <RibbonCard 
-          key={card.id || i}
+          key={card.url}
           index={i} 
           hoveredIndex={hoveredIndex} 
           setHoveredIndex={setHoveredIndex} 
